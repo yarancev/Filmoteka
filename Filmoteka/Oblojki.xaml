@@ -1,0 +1,36 @@
+﻿<Window x:Class="Filmoteka.Oblojki"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Filmoteka"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        Title="Фильмотека" Height="500" Width="800">
+    <Grid Background="#383838">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image x:Name="image_obl" Margin="5" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="270" />
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2">
+            <Label x:Name="lbl_nameOfFilm" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+            <Label x:Name="lbl_janr" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+            <Label x:Name="lbl_review" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+            <Label x:Name="lbl_rejiser" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+            <Label x:Name="lbl_year" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+            <Label x:Name="lbl_rating" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+        </StackPanel>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" Content="Информация:" FontFamily="MicroSquare" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="{x:Null}" Foreground="#FFD8D8D8"/>
+        
+    </Grid>
+</Window>

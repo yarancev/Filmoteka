@@ -1,0 +1,48 @@
+﻿<Window x:Class="Filmoteka.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Filmoteka"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        Title="Фильмотека" Height="600" Width="1000">
+    <Grid x:Name="RegS" Background="#262626">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Content="Регистрация" x:Name="lbl_log" FontFamily="MicroSquare" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Foreground="#FFD8D8D8"/>
+        <Button Grid.Column="0" Content="Регистрация" Grid.ColumnSpan="3" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="MicroSquare" FontSize="45" x:Name="btn_log1" Click="btn_log1_Click" Width="300" Height="70">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+            </Button.Effect>
+        </Button>
+        <Button Grid.Row="0" Grid.Column="2" Content="Логин" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="MicroSquare" FontSize="35" x:Name="btn_registration1" Click="btn_registration1_Click" Width="300" Height="70" Style="{StaticResource MaterialDesignFlatButton}">
+
+        </Button>
+
+        <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="6" MinWidth="800" MinHeight="380" Margin="70" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="140" MaxWidth="600" CornerRadius="30" Background="#383838">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+            </Border.Effect>
+
+        </Border>
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="6" MinWidth="800" MinHeight="380" Margin="70" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBox x:Name="txtb_name" materialDesign:HintAssist.Hint="Введите имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="MicroSquare" Foreground="White" FontSize="25"  Height="70" Width="400" Background="#FF262626" Margin="0 20 0 0"/>
+            <TextBox x:Name="txtb_number" materialDesign:HintAssist.Hint="Введите номер телефона" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="MicroSquare" Foreground="White" FontSize="25"  Height="70" Width="400" Background="#FF262626" Margin="0 20 0 0"/>
+            <TextBox x:Name="txtb_email" materialDesign:HintAssist.Hint="Введите e-mail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="MicroSquare" Foreground="White" FontSize="25"  Height="70" Width="400" Background="#FF262626" Margin="0 20 0 0"/>
+            <PasswordBox x:Name="txtb_pass" materialDesign:HintAssist.Hint="Введите пароль" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="MicroSquare" Foreground="White" FontSize="25"  Height="70" Width="400" Background="#FF262626" Margin="0 20 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>
