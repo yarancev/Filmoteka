@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,22 +20,23 @@ namespace Filmoteka
     /// Логика взаимодействия для Menu.xaml
     /// </summary>
     public partial class Menu : Window
-    {        
-        public Menu()
+    {
+        public static User User;
+        public Menu(User user)
         {
-            InitializeComponent();
-
+            User = user;
+            InitializeComponent();            
+            loadData();
             var client = new MongoClient("mongodb://localhost");
             var database = client.GetDatabase("UsersEatflex");
             IMongoCollection<User> collection = database.GetCollection<User>("Users");
-
-            List<User> loguser;
-
-            loguser = collection.Find(x => x.email == User.logemail && x.password == User.logpass).ToList();
-            lbllogname.Content = $"Привет, {loguser[0].name}!" ;
-        }        
+            
+            lbllogname.Content = $"Привет, {User.Name}!";            
+        }
         private void btn_janr1_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Комедия");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Комедия");
             btn_janr1.Background = Brushes.Gray;
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -44,19 +46,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr9_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Драма");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Драма");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -66,19 +62,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = Brushes.Gray;
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;            
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr8_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Боевик");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Боевик");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -88,19 +78,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = Brushes.Gray;
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;            
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr7_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Романтика");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Романтика");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -110,19 +94,13 @@ namespace Filmoteka
             btn_janr7.Background = Brushes.Gray;
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;            
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr6_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Детектив");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Детектив");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -132,19 +110,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;            
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr5_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Аниме");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Аниме");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -154,19 +126,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;            
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr4_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Ужасы");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Ужасы");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -176,19 +142,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_ujasi.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr3_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Триллер");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Триллер");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr3.Background = Brushes.Gray;
@@ -198,19 +158,13 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;            
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Visible;
+            
         }
 
         private void btn_janr2_Click(object sender, RoutedEventArgs e)
         {
+            Filter("Фантастика");
+            listFilm.ItemsSource = DataBaseMethods.SearchJanrFilm("Фантастика");
             btn_janr1.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr2.Background = Brushes.Gray;
             btn_janr3.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
@@ -220,294 +174,95 @@ namespace Filmoteka
             btn_janr7.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr8.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             btn_janr9.Background = new SolidColorBrush(Color.FromRgb(103, 58, 183));
-            panel_ujasi.Visibility = Visibility.Hidden;
-            panel_triller.Visibility = Visibility.Hidden;
-            panel_romantika.Visibility = Visibility.Hidden;
-            panel_drama.Visibility = Visibility.Hidden;
-            panel_boevik.Visibility = Visibility.Hidden;
-            panel_detective.Visibility = Visibility.Hidden;
-            panel_anim.Visibility = Visibility.Hidden;
-            panel_kom.Visibility = Visibility.Hidden;
-            panel_fant.Visibility = Visibility.Visible;            
-        }
-             
-        private void btn_tiet_Click(object sender, RoutedEventArgs e)
-        {
-            Hide();
-            Oblojki oblojkiWindow = new Oblojki();
-            oblojkiWindow.Show();            
-        }
-
-        private void btn_vvt_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_rs_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_zndvb_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_gryaz_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_chshn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_venom_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_mstitely_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_inter_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_ftigoo_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_deadpool_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_mortal_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_club_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vremya1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vizhivshiy_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_parazity_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_pd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_yaii_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_bbkuk_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_jipkrep_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_kkz_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_sinister_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_strpriz_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_chelmnog_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_aot_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_onepiece_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_ghoul_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_naruto_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_unesenpriz_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_hxh_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vvrgr_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vtihom_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_ischez_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_platform_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_poisk_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_ubpootkr_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vekadal_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vmdod_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_zovimsim_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_passajiry_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_sumerki_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_titanik_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_brat_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_idismotr_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_meganlivi_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_ponakl_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_posoobr_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_forsaj_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_11_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_volk_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_vremya2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_odarennaya_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_raskopki_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_secret_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+                        
+        }             
+        
         private void btn_reload_Click(object sender, RoutedEventArgs e)
         {
             Hide();
             MainWindow registrationWindow = new MainWindow();
             registrationWindow.Show();
+        }
+
+        private void listFilm_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var film = listFilm.SelectedItem as Films;
+            Oblojki oblojki = new Oblojki(film, User);
+            oblojki.Show();
+            this.Close();            
+        }
+        public async void loadData()
+        {            
+            string connectionString = "mongodb://localhost";
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("UsersEatflex");
+            var collection = database.GetCollection<Films>("Films");
+            var filter = new BsonDocument();
+            List<Films> film = new List<Films>();
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var films = cursor.Current;
+                    foreach (Films doc in films)
+                    {
+                        film.Add(new Films(doc.NameOfFilm, doc.Rating, doc.Review, doc.Janr, doc.Year, doc.Rejiser, doc.Image));
+                    }
+                }
+            }
+            listFilm.ItemsSource = film.ToList();
+        }
+        public async void Filter(string Janr)
+        {
+            string connectionString = "mongodb://localhost";
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("UsersEatflex");
+            var collection = database.GetCollection<Films>("Films");
+            var filter = new BsonDocument();
+            List<Films> film = new List<Films>();
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var people = cursor.Current;
+                    foreach (Films doc in people)
+                    {
+                        film.Add(new Films(doc.NameOfFilm, doc.Rating, doc.Review, doc.Janr, doc.Year, doc.Rejiser, doc.Image));
+                    }
+                }
+            }
+            listFilm.ItemsSource = film.ToList().Where(f => f.Janr == Janr);
+        }        
+
+        private void search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search(search.Text);
+        }
+
+        private void btn_search_Click(object sender, RoutedEventArgs e)
+        {
+            //listFilm.ItemsSource = DataBaseMethods.SearchFilm(search.Text).ToList();
+        }
+        public async void Search(string nameOfFilm)
+        {
+            string connectionString = "mongodb://localhost";
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase("UsersEatflex");
+            var collection = database.GetCollection<Films>("Films");
+            var filter = new BsonDocument();
+            List<Films> film = new List<Films>();
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var people = cursor.Current;
+                    foreach (Films doc in people)
+                    {
+                        film.Add(new Films(doc.NameOfFilm, doc.Rating, doc.Review, doc.Janr, doc.Year, doc.Rejiser, doc.Image));
+                    }
+                }
+            }
+            listFilm.ItemsSource = film.ToList().Where(f => f.NameOfFilm == nameOfFilm);
         }
     }
 }

@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Title="Фильмотека" Height="500" Width="800">
-    <Grid Background="#383838">
+        Title="Фильмотека" Height="650" Width="1000">
+    <Grid Background="#262626">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -21,16 +21,44 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image x:Name="image_obl" Margin="5" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="200" Height="270" />
-        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2">
-            <Label x:Name="lbl_nameOfFilm" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
-            <Label x:Name="lbl_janr" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
-            <Label x:Name="lbl_review" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
-            <Label x:Name="lbl_rejiser" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
-            <Label x:Name="lbl_year" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
-            <Label x:Name="lbl_rating" FontFamily="MicroSquare" FontSize="25" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10"/>
+        <Line Grid.ColumnSpan="3" Grid.RowSpan="5" X1="440" X2="900" Y1="120" Y2="120" Stroke="#F2F3F4" StrokeThickness="5"/>
+        <Border Width="620" Height="430" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="5" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="100" CornerRadius="30" Background="#383838">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+            </Border.Effect>
+                    
+        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="4" Margin="40">
+            <Button  Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontFamily="MicroSquare" FontSize="25" x:Name="btn_delete" Click="btn_delete_Click" Width="250" Height="50"  Visibility="Hidden" Margin="20">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+                </Button.Effect>
+            </Button>
+            <Button  Content="Редактировать" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontFamily="MicroSquare" FontSize="25" x:Name="btn_redakt" Click="btn_redakt_Click" Width="250" Height="50"  Visibility="Hidden" Margin="20">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+                </Button.Effect>
+            </Button>
         </StackPanel>
-        <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" Content="Информация:" FontFamily="MicroSquare" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="{x:Null}" Foreground="#FFD8D8D8"/>
-        
+        <Image x:Name="image_obl" Margin="5 70 5 5" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="370" />
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Margin="30" Width="600" Height="400">
+            <TextBlock x:Name="txt_nameOfFilm" FontFamily="MicroSquare" FontSize="15" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10" TextWrapping="Wrap"/>
+            <TextBlock x:Name="txt_janr" FontFamily="MicroSquare" FontSize="15" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10" TextWrapping="Wrap"/>
+            <TextBlock x:Name="txt_review" FontFamily="MicroSquare" FontSize="15" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10" TextWrapping="Wrap"/>
+            <TextBlock x:Name="txt_rejiser" FontFamily="MicroSquare" FontSize="15" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10" TextWrapping="Wrap"/>
+            <TextBlock x:Name="txt_year" FontFamily="MicroSquare" FontSize="15" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10" TextWrapping="Wrap"/>
+            <TextBlock x:Name="txt_rating" FontFamily="MicroSquare" FontSize="15" HorizontalAlignment="Left" Background="{x:Null}" Foreground="#F2F3F4" Margin="10" TextWrapping="Wrap"/>
+        </StackPanel>
+        <Label Margin="0 30 0 0" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" Content="Информация:" FontFamily="MicroSquare" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Foreground="#FFD8D8D8"/>
+        <Button Margin="0 40 0 0" Grid.Row="5" Grid.Column="0" Content="Назад" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="MicroSquare" FontSize="25" x:Name="btn_nazad" Click="btn_nazad_Click" Width="300" Height="50">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+            </Button.Effect>
+        </Button>
+        <Button Margin="0 20 0 0" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Content="Добавить отзыв" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="MicroSquare" FontSize="25" x:Name="btn_otziv" Click="btn_otziv_Click" Width="300" Height="50">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="50" Color="Black" ShadowDepth="0"/>
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>

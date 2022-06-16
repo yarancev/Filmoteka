@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Filmoteka
 {
-    class User
+    public class User
     {
         [BsonId]
         [BsonIgnoreIfDefault]
@@ -16,29 +16,29 @@ namespace Filmoteka
 
         [BsonIgnoreIfDefault]
         [BsonIgnoreIfNull]
-        public string name;      
+        public string Name;
 
         [BsonIgnoreIfDefault]
         [BsonIgnoreIfNull]
-        public string email;
+        public string Email;
 
         [BsonIgnoreIfDefault]
         [BsonIgnoreIfNull]
-        public string password;
+        public string Password;
 
         [BsonIgnoreIfDefault]
         [BsonIgnoreIfNull]
-        public string number;
+        public string Number;
 
-        public static string logpass;
-        public static string logemail;
+        //public static string logpass;
+        //public static string logemail;
 
         public User(string name, string number, string email, string password)
         {
-            this.name = name;            
-            this.email = email;
-            this.password = password;
-            this.number = number;
+            Name = name;
+            Email = email;
+            Password = password;
+            Number = number;
         }
     }
 }

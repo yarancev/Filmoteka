@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "62a38598fd67eeee335e6391"
+  },
+  "name": "Максим",
+  "email": "allon.79068@gmail.com",
+  "password": "max007007",
+  "number": "89539487036"
+},{
+  "_id": {
+    "$oid": "62a393c3f4572e90bc9199fc"
+  },
+  "name": "Рустам",
+  "email": "daminov_87@bk.ru",
+  "password": "rustam123",
+  "number": "89867175187"
+},{
+  "_id": {
+    "$oid": "62a7ca5eeceee7971971cdd6"
+  },
+  "name": "1",
+  "email": "1",
+  "password": "1",
+  "number": "1"
+},{
+  "_id": {
+    "$oid": "62aa02b7e90bdd9513550280"
+  },
+  "name": "Exal",
+  "email": "islrashit@gmail.com",
+  "password": "123456789",
+  "number": "89501515087"
+},{
+  "_id": {
+    "$oid": "62ab5dfec283c6eb30d1e9b5"
+  },
+  "name": "admin",
+  "email": "admin",
+  "password": "admin",
+  "number": "1"
+}]

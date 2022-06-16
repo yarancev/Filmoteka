@@ -12,24 +12,25 @@ using MongoDB.Bson;
 
 namespace Filmoteka
 {
-    class Films
+    public class Films
     {
         Queue<string> links = new Queue<string>();
-        public Films(string nameOfFilm, double rating, string review, string janr, int year, string rejiser)
+        public Films(string nameOfFilm, double rating, string review, string janr, int year, string rejiser, string image)
         {
             NameOfFilm = nameOfFilm;
             Rating = rating;
             Review = review;
             Janr = janr;
             Year = year;
-            Rejiser = rejiser;            
+            Rejiser = rejiser;
+            Image = image;
         }
 
         [BsonId]
         [BsonIgnoreIfDefault]
         public ObjectId _id;
         [BsonIgnoreIfDefault]
-        public string NameOfFilm { get; set; }
+        public string NameOfFilm  { get; set; }
         [BsonIgnoreIfDefault]
         public double Rating { get; set; }
         [BsonIgnoreIfDefault]
@@ -39,6 +40,7 @@ namespace Filmoteka
         [BsonIgnoreIfDefault]
         public int Year { get; set; }
         [BsonIgnoreIfDefault]
+        public string Image { get; set; }
         public string Rejiser { get; set; }        
     }
 }

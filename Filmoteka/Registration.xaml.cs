@@ -38,7 +38,7 @@ namespace Filmoteka
             var database = client.GetDatabase("UsersEatflex");
             IMongoCollection<User> collection = database.GetCollection<User>("Users");
 
-            List<User> list = collection.Find(x => x.number == txtb_number.Text).ToList();
+            List<User> list = collection.Find(x => x.Number == txtb_number.Text).ToList();
             if (list.Count > 0 || number.Length < 11 || number.Length > 11)
             {
                 txtb_number.ToolTip = "Номер некорректный";
@@ -51,7 +51,7 @@ namespace Filmoteka
                 txtb_number.Background = Brushes.Transparent;
             }
            
-            List<User> list2 = collection.Find(x => x.email == txtb_email.Text).ToList();
+            List<User> list2 = collection.Find(x => x.Email == txtb_email.Text).ToList();
             if (list.Count > 0 || !email.Contains("@") || !email.Contains("."))
             {
                 checkright = false;
@@ -73,19 +73,20 @@ namespace Filmoteka
 
             if (checkright == true)
             {
-                User.logemail = txtb_email.Text;
-                User.logpass = txtb_pass.Password;
+                //User Email = txtb_email.Text;
+                //User.logpass = txtb_pass.Password;
 
-                collection.InsertOne(new User(txtb_name.Text, txtb_number.Text, txtb_email.Text, txtb_pass.Password));
-                //Extensions.AddToDataBase(txtb1.Text, txtb2.Text, txtb3.Text, txtb4.Text, txtb5.Text);
+                collection.InsertOne(new User(txtb_name.Text, txtb_number.Text, txtb_email.Text, txtb_pass.Password));                
                 txtb_name.Clear();
                 txtb_number.Clear();
                 txtb_email.Clear();
                 txtb_pass.Clear();
                 MessageBox.Show("Вы успешно зарегистрировались");
 
+                User user = new User(txtb_name.Text, txtb_number.Text, txtb_email.Text, txtb_pass.Password);
+
                 Hide();
-                Menu menuWindow = new Menu();
+                Menu menuWindow = new Menu(user);
                 menuWindow.Show();
             }
         }
